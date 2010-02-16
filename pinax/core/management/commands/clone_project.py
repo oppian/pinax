@@ -121,7 +121,7 @@ def update_rename_deploy_files(path, old_name, new_name):
     modpython_file = open(os.path.join(path, "modpython.py"), "rb")
     modpython = modpython_file.read()
     modpython_file.close()
-    virtualenv_base = os.environ.get("VIRTUAL_ENV", "")
+    virtualenv_base = os.environ.get("VIRTUAL_ENV", "").replace('\\', '/')
     modpython = VIRTUALENV_BASE_RE.sub('VIRTUALENV_BASE = "%s"' % virtualenv_base, modpython)
     modpython_file = open(os.path.join(path, "modpython.py"), "wb")
     modpython_file.write(modpython)
