@@ -1,14 +1,15 @@
 import os
 
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
 from django.template.loader import select_template
-from django.utils.translation import ugettext_lazy as _ # @@@ really should be ugettext
+from django.utils.translation import ugettext, ugettext_lazy as _
 
+from django.contrib import messages
 from django.contrib.auth.models import User
 
 if "notification" in settings.INSTALLED_APPS:
@@ -20,6 +21,8 @@ from threadedcomments.models import ThreadedComment
 
 from topics.forms import TopicForm
 from topics.models import Topic
+
+
 
 def topics(request, group_slug=None, form_class=TopicForm, template_name="topics/topics.html", bridge=None):
     
@@ -54,10 +57,16 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
                         group.associate(topic, commit=False)
                     topic.creator = request.user
                     topic.save()
-                    request.user.message_set.create(message=_("You have started the topic %(topic_title)s") % {"topic_title": topic.title})
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("You have started the topic %(topic_title)s") % {
+                            "topic_title": topic.title
+                        }
+                    )
                     topic_form = form_class() # @@@ is this the right way to reset it?
             else:
-                request.user.message_set.create(message=_("You are not a member and so cannot start a new topic"))
+                messages.add_message(request, messages.ERROR,
+                    ugettext("You are not a member and so cannot start a new topic")
+                )
                 topic_form = form_class()
         else:
             return HttpResponseForbidden()
