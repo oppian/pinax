@@ -224,6 +224,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"/openid",
     r"^/waitinglist",
     r"^/__debug__",
+    r"^/about",    
 ]
 
 DEBUG_TOOLBAR_CONFIG = {

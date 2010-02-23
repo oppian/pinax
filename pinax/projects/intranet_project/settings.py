@@ -235,6 +235,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/confirm_email",
     r"^/openid",
     r"^/__debug__",
+    r"^/about",
 ]
 
 DEBUG_TOOLBAR_CONFIG = {
