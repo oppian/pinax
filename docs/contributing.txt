@@ -210,13 +210,13 @@ Here is an example of these rules applied::
     from django.contrib.auth.models import User
     
     # third set of imports are Pinax imports
-    from pinax.utils.importlib import import_module
+    from pinax.utils.examplelib import function_name
     
     # forth set of imports are external apps (if applicable)
     from tagging.fields import TagField
     
     # fifth set of imports are local apps
-    from tasks.fields import MarkupField
+    from pinax.apps.tasks.fields import MarkupField
     
     
     
