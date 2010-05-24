@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "groups.middleware.GroupAwareMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
     "pinax.apps.account.middleware.AuthenticatedMiddleware",
     "django.middleware.doc.XViewMiddleware",
@@ -126,7 +127,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.openid",
     "pinax.apps.account.context_processors.account",
 ]
 
@@ -165,6 +165,7 @@ INSTALLED_APPS = [
     "staticfiles",
     "debug_toolbar",
     "tagging_ext",
+    "voting",
     
     # Pinax
     "pinax.apps.basic_profiles",

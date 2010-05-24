@@ -6,7 +6,7 @@
 {% load tagging_tags %}
 {% load comments_tag %}
 {% load photo_tags %}
-{% load flagtags %}
+{% load flag_tags %}
 {% load theme_tags %}
 
 {% block head_title %}{% blocktrans %}Photo Details{% endblocktrans %}{% endblock %}
@@ -34,7 +34,7 @@
         <div class="form-toggle">
             <p><span id="flag-toggle">{% silk "flag_red" %}{% trans "Flag as inappropriate" %}</span></p>
              <div id="flag-form" style="display: none;">
-                {% flag photo request.user.id %}
+                {% flag photo "member" %}
              </div>
         </div>
         
